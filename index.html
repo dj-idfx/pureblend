@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pure Blend Westvlamsche Hiphop ">
+    <meta name="keywords" content="pure blend westvlamsche hiphop idfx herbie sjen anoubis krotetote stream download mixtape krottegem dj mc">
+    <meta name="theme-color" content="#800080">
+    <title>PURE BLEND</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="https://pureblend.be/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;900&family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        /* VARIABLES & THEME SETTINGS */
+        :root {
+            --pb-color-light: white;
+            --pb-color-light-rgb: 255,255,255;
+            --pb-color-dark: black;
+            --pb-color-dark-rgb: 0,0,0;
+            --pb-color-border-light: #d4d4d4;
+            --pb-color-border-dark: #4d4d4d;
+            --pb-color-accent-light: pink;
+            --pb-color-accent-light-rgb: 255,192,203;
+            --pb-color-accent-dark: purple;
+            --pb-color-accent-dark-rgb: 128,0,128;
+            --pb-font-family: 'Roboto', Arial, Tahoma, Verdana, sans-serif;
+            --pb-heading-font-family: 'Raleway', 'Roboto', Arial, Tahoma, Verdana, sans-serif;
+            --pb-circle-width: 150px;
+            --pb-circle-offset: 0.35;
+        }
+
+        .pb-day-theme {
+            --pb-theme-color: var(--pb-color-dark);
+            --pb-theme-color-rgb: var(--pb-color-dark-rgb);
+            --pb-theme-background-color: var(--pb-color-light);
+            --pb-theme-border-color: var(--pb-color-border-dark);
+            --pb-theme-border-color-inverse: var(--pb-color-border-light);
+            --pb-theme-accent-color: var(--pb-color-accent-light);
+            --pb-theme-accent-color-rgb: var(--pb-color-accent-light-rgb);
+            --pb-theme-moon-color: #999;
+            --pb-theme-header-bg-image: url('/assets/img/day.jpg');
+        }
+
+        .pb-night-theme {
+            --pb-theme-color: var(--pb-color-light);
+            --pb-theme-color-rgb: var(--pb-color-light-rgb);
+            --pb-theme-background-color: var(--pb-color-dark);
+            --pb-theme-border-color: var(--pb-color-border-light);
+            --pb-theme-border-color-inverse: var(--pb-color-border-dark);
+            --pb-theme-accent-color: var(--pb-color-accent-dark);
+            --pb-theme-accent-color-rgb: var(--pb-color-accent-dark-rgb);
+            --pb-theme-moon-color: #666;
+            --pb-theme-header-bg-image: url('/assets/img/night.jpg');
+        }
+
+        .only-theme-dark { display: none; user-select: none; visibility: hidden; }
+        .pb-day-theme .only-theme-dark { display: none; user-select: none; visibility: hidden; }
+        .pb-night-theme .only-theme-light { display: none; user-select: none; visibility: hidden; }
+        .pb-night-theme .only-theme-dark { display: initial; user-select: initial; visibility: initial; }
+
+        /* ELEMENTS BASE STYLING */
+        *  {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            border-width: 0;
+            border-style: solid;
+            transition: all 350ms ease-in-out;
+            font-family: var(--pb-font-family);
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+
+            /* Set fallback colors for the theming class variables that are not declared in :root */
+            color: var(--pb-theme-color, black);
+            background-color: var(--pb-theme-background-color, white);
+            border-color: var(--pb-theme-border-color, black);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        main {
+            margin-bottom: 3rem;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--pb-heading-font-family);
+            user-select: none;
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 2.75rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        h2 {
+            display: inline-block;
+            font-weight: 600;
+            font-size: 1.75rem;
+            letter-spacing: 1px;
+            margin: 3.75rem 0 1.5rem;
+            padding-top: 1rem;
+            border-top: .5rem solid var(--pb-theme-accent-color, gray);
+        }
+
+        h3  {
+            font-weight: 900;
+            font-size: 1.4rem;
+            font-style: italic;
+            margin-bottom: 1.125rem;
+            color: var(--pb-theme-accent-color, gray);
+        }
+
+        p {
+            line-height: 1.375;
+        }
+
+        p ~ p {
+            margin-top: 1.5rem;
+        }
+
+        /* CLASS STYLES */
+        .container {
+            max-width: 1020px;
+            padding: 0 20px;
+            margin: 0 auto;
+        }
+
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .theme-switch input {
+            visibility: hidden;
+            width: 0;
+            height: 0;
+        }
+        .theme-switch svg {
+            position: relative;
+            width: 1.5rem;
+            height: auto;
+            opacity: 0.65;
+            fill: currentColor;
+        }
+        .theme-switch svg:nth-of-type(2) {
+            top: -2px;
+        }
+        .theme-switch .slider {
+            position: relative;
+            width: 40px;
+            height: 22px;
+            border-radius: 11px;
+            border-width: 1px;
+            margin: 0 6px;
+            background-color: var(--pb-theme-accent-color, gray);
+            opacity: 0.7;
+        }
+        .theme-switch .slider:hover {
+            opacity: 1;
+        }
+        .theme-switch .slider:before {
+            position: absolute;
+            content: "";
+            width: 16px;
+            height: 16px;
+            left: 19px;
+            top: 2px;
+            border-radius: 50%;
+            background-color: var(--pb-color-light);
+            box-shadow: 1px 1px 1px rgba(var(--pb-color-dark-rgb), 0.4);
+            transition: all 350ms ease-in-out;
+        }
+        .theme-switch input:checked + .slider:before {
+            left: 3px;
+            box-shadow: -1px 1px 1px rgba(var(--pb-color-dark-rgb), 0.2);
+        }
+
+        .header-box {
+            border-width: 1px;
+            padding: 2rem;
+            border-radius: 1rem;
+
+            background-color: transparent;
+            background-image: var(--pb-theme-header-bg-image);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .circles-container {
+            position: relative;
+            width: var(--pb-circle-width);
+            height: var(--pb-circle-width);
+            margin: 0 auto calc(var(--pb-circle-width) * var(--pb-circle-offset));
+        }
+        .circle {
+            position: absolute;
+            inset: 0;
+            border-radius: calc(var(--pb-circle-width) / 2);
+            border-color: rgba(var(--pb-theme-color-rgb, 0,0,0), 0.4);
+            background-color: var(--pb-theme-accent-color, gray);
+        }
+        .circle:nth-of-type(1) {
+            left: calc(var(--pb-circle-width) * var(--pb-circle-offset) * -1);
+            right: calc(var(--pb-circle-width) * var(--pb-circle-offset));
+            z-index: +10;
+        }
+        .circle:nth-of-type(2) {
+            left: calc(var(--pb-circle-width) * var(--pb-circle-offset));
+            right: calc(var(--pb-circle-width) * var(--pb-circle-offset) * -1);
+            z-index: +5;
+            mix-blend-mode: luminosity;
+            border-width: calc(var(--pb-circle-width) / 6);
+            background-color: transparent;
+        }
+        .circle:nth-of-type(3) {
+            top: calc(var(--pb-circle-width) * var(--pb-circle-offset));
+            bottom: calc(var(--pb-circle-width) * var(--pb-circle-offset) * -1);
+            z-index: +1;
+            opacity: 0.4;
+            box-shadow:  0 0 0.25rem rgba(var(--pb-theme-color-rgb, 0,0,0), 0.6);
+        }
+        .circle:nth-of-type(1n+4) {
+            display: none;
+        }
+
+        .eclips-text {
+            width: calc(100% - var(--pb-circle-width));
+            padding-right: 4rem;
+        }
+        .eclips {
+            position: relative;
+            width: var(--pb-circle-width);
+        }
+        .moon, .sun {
+            width: var(--pb-circle-width);
+            height: var(--pb-circle-width);
+            border-radius: calc(var(--pb-circle-width) / 2);
+        }
+        .moon {
+            position: sticky;
+            top: 24.3%;
+            background-color: var(--pb-theme-moon-color, gray);
+            z-index: +1;
+         }
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--pb-theme-accent-color, black);
+            box-shadow:  0 0 .5rem rgba(var(--pb-theme-accent-color-rgb, 0,0,0), 0.8);
+            z-index: 0;
+        }
+
+        .link-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 -.5rem;
+        }
+        .link-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 145px;
+            height: 145px;
+            padding: 1rem;
+            margin: .25rem;
+            border-width: 2px;
+            border-radius: 1rem;
+            border-color: var(--pb-theme-border-color-inverse, gray);
+            background-color: rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 0.3);
+        }
+        .link-logo:hover {
+            border-color: var(--pb-theme-border-color, black);
+            background-color: rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 0.8);
+        }
+        .link-logo svg {
+            height: 50px;
+            width: auto;
+            max-width: 50px;
+            fill: currentColor;
+            background-color: transparent;
+            opacity: 0.6;
+        }
+        .link-logo:hover svg {
+            opacity: 1;
+        }
+
+        .text-link:hover,
+        .text-link:hover small {
+            text-decoration-color: var(--pb-theme-accent-color) !important;
+            opacity: .95;
+        }
+
+        .youtube-container {
+            display: inline-block;
+            width: 735px;
+            height: 410px;
+            max-width: 100%;
+            box-shadow: .175rem .175rem 0 .175rem rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 1);
+            border-bottom-right-radius: 1rem;
+        }
+
+        .youtube-container iframe {
+            border-bottom-right-radius: 1rem;
+        }
+
+        .youtube-container-4-4 {
+            width: 470px;
+            height: 470px;
+        }
+
+        .youtube-container-shadow-left {
+            box-shadow: -.175rem -.175rem 0 .175rem rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 1);
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 1rem;
+        }
+
+        .youtube-container-shadow-left iframe {
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 1rem;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .mixtape-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .mixtape {
+            width: 48%;
+            height: 120px;
+            margin-bottom: 3.75%;
+            box-shadow: 1px 1px 0 1px rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 1);
+            border-bottom-right-radius: 1rem;
+            overflow: hidden;
+        }
+
+        .img-fw {
+            width: 100%;
+            height: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.375rem 0.875rem;
+            line-height: 1.5;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            vertical-align: middle;
+            user-select: none;
+            border: 2px solid rgba(var(--pb-theme-accent-color-rgb, 110,110,110), 0.8);
+            background-color: rgba(var(--pb-theme-accent-color-rgb, 198,198,198), 0.8);
+            border-radius: 2rem;
+            transition: background-color .15s ease-in-out, border-color .15s ease-in-out;
+            cursor: pointer;
+        }
+
+        .btn:hover,
+        .btn:active {
+            border: 2px solid rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 1);
+            background-color: rgba(var(--pb-theme-accent-color-rgb, 124,124,124), 1);
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .link-logo {
+                width: 30%;
+            }
+
+            .youtube-container {
+                width: 100%;
+            }
+
+            .youtube-container-4-4 {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            .mixtape {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .wvl-hiphop-intro p span {
+                max-width: 71% !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .link-logo {
+                width: 31%;
+            }
+
+            .eclips-text {
+                width: calc(100% - var(--pb-circle-width) + 2rem);
+                padding-right: 2rem;
+            }
+            .eclips {
+                width: calc(var(--pb-circle-width) - 2rem);
+            }
+            .moon, .sun {
+                width: calc(var(--pb-circle-width) - 2rem);
+                height: calc(var(--pb-circle-width) - 2rem);
+            }
+
+            .wvl-hiphop-intro img {
+                float: none !important;
+                margin-bottom: 0 !important;
+            }
+
+            .wvl-hiphop-intro p span {
+                max-width: 100% !important;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .link-logo {
+                width: 47%;
+            }
+
+            .eclips-text {
+                width: 100%;
+                padding-right: 0;
+            }
+            .eclips {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div style="display: flex; justify-content: end; align-items: center; padding: 20px 0;">
+            <label class="theme-switch">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 112C247.2 112 240 104.8 240 96V16C240 7.156 247.2 0 256 0s16 7.156 16 16V96C272 104.8 264.8 112 256 112zM272 496V416c0-8.844-7.156-16-16-16S240 407.2 240 416v80c0 8.844 7.156 16 16 16S272 504.8 272 496zM512 256c0-8.844-7.156-16-16-16H416c-8.844 0-16 7.156-16 16s7.156 16 16 16h80C504.8 272 512 264.8 512 256zM112 256c0-8.844-7.156-16-16-16H16C7.156 240 0 247.2 0 256s7.156 16 16 16H96C104.8 272 112 264.8 112 256zM380.5 154.2l56.56-56.59c6.25-6.25 6.25-16.38 0-22.62s-16.38-6.25-22.62 0l-56.56 56.59c-6.25 6.25-6.25 16.37 0 22.62c3.125 3.125 7.219 4.691 11.31 4.691S377.3 157.3 380.5 154.2zM97.61 437l56.56-56.59c6.25-6.25 6.25-16.37 0-22.62s-16.38-6.253-22.62-.0031l-56.56 56.59c-6.25 6.25-6.25 16.38 0 22.62c3.125 3.125 7.219 4.688 11.31 4.688S94.48 440.2 97.61 437zM437 437c6.25-6.25 6.25-16.38 0-22.62l-56.56-56.59c-6.25-6.25-16.38-6.247-22.62 .0031s-6.25 16.37 0 22.62l56.56 56.59c3.125 3.125 7.219 4.688 11.31 4.688S433.9 440.2 437 437zM154.2 154.2c6.25-6.25 6.25-16.37 0-22.62L97.61 74.97c-6.25-6.25-16.38-6.25-22.62 0s-6.25 16.38 0 22.62l56.56 56.59c3.125 3.125 7.219 4.688 11.31 4.688S151 157.3 154.2 154.2zM368 256c0-61.75-50.25-112-112-112S144 194.3 144 256s50.25 112 112 112S368 317.8 368 256zM336 256c0 44.13-35.89 80-80 80S176 300.1 176 256S211.9 176 256 176S336 211.9 336 256z"/></svg>
+                <input type="checkbox">
+                <span class="slider"></span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M322.1 401.4l-4.688 .375c-7.594 1.5-15.41 2.25-23.16 2.25c-67 0-121.5-54.66-121.5-121.8c0-43.75 23.66-84.38 61.72-106.1C243.3 171 248 161.2 246.3 151C244.5 140.8 237 133.1 226.1 131.3C215.3 129.1 203.2 127.1 191.7 127.1C85.92 127.1 0 214.1 0 320s86.01 192 191.8 192c58.19 0 112.6-26.04 148.9-71.04c6.062-7.25 7.275-16.99 3.275-25.52C340 406.9 331.4 401.4 322.1 401.4zM191.8 480C103.7 480 32 408.2 32 320s71.69-160 159.8-160c2.938 0 5.906 .0938 8.875 .25C163.3 189.2 140.7 234.2 140.7 282.2c0 84.84 68.88 153.8 153.5 153.8c2.625 0 5.25-.0625 7.844-.1875C272.6 464.1 233.4 480 191.8 480zM496 208h-32v-32C464 167.2 456.8 160 448 160s-16 7.156-16 16v32h-32C391.2 208 384 215.2 384 224s7.156 16 16 16h32v32C432 280.8 439.2 288 448 288s16-7.156 16-16v-32h32C504.8 240 512 232.8 512 224S504.8 208 496 208zM432 96c0-8.844-7.156-16-16-16h-64v-64C352 7.156 344.8 0 336 0S320 7.156 320 16v64h-64C247.2 80 240 87.16 240 96S247.2 112 256 112h64v64C320 184.8 327.2 192 336 192S352 184.8 352 176v-64h64C424.8 112 432 104.8 432 96z"/></svg>
+            </label>
+        </div>
+
+        <div class="header-box">
+            <h1 style="margin-bottom: 1rem; background-color: transparent;">
+                PURE BLEND
+            </h1>
+
+            <div class="circles-container" style="background-color: transparent">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="container" style="padding-bottom: 1rem;">
+        <h2>
+            Ergens in 1999...
+        </h2>
+
+        <div style="margin-bottom: 2rem; display: flex;">
+            <div class="eclips-text">
+                <p>
+                    Op een warme zomeravond, in een rokerige zolder van een simpel arbeidershuis gelegen te Krottegem, gebeurde iets niet eigen aan de plaatselijk gangbare cultuur.
+                    Geen&nbsp;melige klassiekers, gemaakt met echte instrumenten en waarvan iedereen in dronken toestand op zijn minst het refrein half foutief kon meezingen,
+                    maar eerder eentonige klanken die ritmisch perfect werden afgespeeld, in een eindeloze loop aan een gematigd tempo, klonken door de luidsprekers.
+                    De&nbsp;eerste beat ooit van <strong>idfx</strong> was net de dag voordien geprogrammeerd en meteen vastgezet in het geheugen van een drumcomputer, waardoor het die nacht opnieuw en identiek kon worden afgespeeld om daarbij te scratchen tot in de vroege uurtjes.
+                </p>
+
+                <p>
+                    De volgende woensdag voltrok zich
+                    <a href="https://www.vrt.be/vrtnws/nl/2017/08/21/totale-zonsverduistering-in-belgie--herbekijk-het-journaal-uit-1/" target="_blank" class="text-link">een&nbsp;zonsverduistering</a>
+                    boven het Europese continent, die op Belgisch grondgebied enkel in een volledig andere uithoek van het land compleet zichtbaar was.
+                    Virton&nbsp;werd uitgekozen als eindhalte van de treinroute, ondernomen door een bende vrienden, enkel en alleen om het korte astronomisch fenomeen te kunnen aanschouwen met eigen ogen.
+                    Eén&nbsp;van de kompanen, gekend onder de roepnaam <strong>herbie</strong>, bleef 's&nbsp;avonds na een lange terugreis, uit dat verre zuiderse punt via het oude spoornetwerk, hangen op de zolder te Krottegem waar hij, tijdens het opnieuw afspelen van de met computerchips gefabriceerde beat, spontaan en indrukwekkend begon te freestylen in de eigen niet&#8209;Engelse&nbsp;taal.
+                </p>
+
+                <p>
+                    Een totaal onverwachte toevalligheid of misschien wel miljarden jaren voordien reeds vastgelegd in de kosmische cyclus?
+                    Ongeacht de oorzaak zou deze bijeenkomst en de getapete jam, die de eeuwigheid inging als de eclips&#8209;mix, leiden tot de geboorte van de toen nog naamloze band <strong>Pure&nbsp;Blend</strong>.
+                </p>
+
+                <p>
+                    De eerste acht seizoenen vol beats, rhymes en een heel kort interview op WTV vlogen, net zoals de vele tijdelijke bandleden, in een oogwenk voorbij waarna Pure&nbsp;Blend, samen met de bevriende <strong>21&nbsp;Kru</strong>, overging tot een basiskern die een tijdlang onveranderd bleef, met&nbsp;toen 2&nbsp;emcees en 2&nbsp;deejays als liveact.
+                    Demos en mixtapes werden uitgebracht onder het eigen verzonnen, maar duidelijk door South&nbsp;Park geïnspireerde <strong>True&nbsp;Freak&nbsp;Label</strong>.
+                </p>
+
+                <p>
+                    Dankzij lokale dansfeesten met weinig aandacht voor de wet werd een&nbsp;beperkt publiek de aansluitende jaren ook bekend met het&nbsp;dj&#8209;duo <strong>Boobie&nbsp;Brothers</strong>, waarbij ze hen leerden kennen als rasechte hiphop turntablists en party&nbsp;rockers, terwijl <strong>Toxicomen&nbsp;Sound</strong> dancehall en dub festijnen voorzag van reggaeklanken met daarbovenop Jamaicaanse poëzie.
+                    Pure&nbsp;Blend opereerde een decennium lang in verscheidene vormen, genres en met variërende aantallen terwijl menig vriend en weinig vijand van hun overkoepelende cannabis grootloge <strong>Krote&nbsp;Tote&nbsp;Krew</strong> zagen dat het redelijk&nbsp;goed&nbsp;was.
+                </p>
+            </div>
+
+            <div class="eclips">
+                <div class="moon"></div>
+
+                <div class="sun"></div>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; overflow: hidden; border-radius: 1rem;">
+            <img src="/assets/img/banner.png" alt="Krottegem" width="980" height="180" class="img-fw" style="min-width: 840px;" loading="lazy">
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 1rem;">
+        <h2>
+            In 2009...
+        </h2>
+
+        <p style="margin-bottom: 3.5rem;">
+            Na ongeveer 520 zondagen sinds het ontstaan beslisten de twee oprichters herbie&nbsp;&&nbsp;idfx om hun eigen favoriete muzikale Pure&nbsp;Blend creaties te bundelen in een album, dat op enkele dagen tijd werd opgenomen binnen&nbsp;een donker vakantiehuisje gelegen te midden van de inspirerende Ardennen.
+            Met daarbovenop een Zwoare&nbsp;Bloazers collabo als kers op de spacecake werd hun West&#8209;Vlaamse debuutplaat <a href="https://pure-blend.bandcamp.com/album/het-nieuw-geloof" target="_blank" class="text-link">Het&nbsp;Nieuw&nbsp;Geloof</a> gepresenteerd aan het wereldwijde internet publiek op 31&nbsp;december van datzelfde&nbsp;jaar.
+        </p>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; margin-bottom: 2rem;">
+            <!-- West-Vlanders video -->
+            <div class="youtube-container youtube-container-4-4 youtube-container-shadow-left" style="margin-right: 10px; margin-bottom: 2.5rem;">
+                <iframe width="360" height="360" src="https://www.youtube.com/embed/mkCTIPQOy_E?controls=0"
+                        title="Pure Blend - West-Vlanders"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Wonders video -->
+            <div class="youtube-container youtube-container-4-4" style="margin-left: 10px; margin-bottom: 2.5rem;">
+                <iframe width="360" height="360" src="https://www.youtube.com/embed/8Bs5B0lGSfI?controls=0"
+                        title="Pure Blend - Wonders"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/assets/zip/PB-Het_Nieuw_Geloof-2009.zip" target="_blank" class="btn" style="margin: 1rem;">DOWNLOAD 'HET NIEUW GELOOF'</a>
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 1rem;">
+        <h2>
+            De volgende jaren...
+        </h2>
+
+        <p>
+            Optredens, feestjes, festivals, verjaardagsfuiven en kraakpand raves volgden elkaar rustig op terwijl de naam Pure&nbsp;Blend hier en daar niet enkel als act te zien was op flyers uit die tijd, maar ook als organisator waardoor ze begonnen op te vallen in de kleine scene.
+            De toen al legendarische <strong>Sjen&nbsp;Anoubis</strong> van de Emelgang crew, voordien te horen op de track
+            <a href="https://pure-blend.bandcamp.com/track/de-plong" target="_blank" class="text-link">De&nbsp;Plong</a>, versmolt zich met Pure Blend en werd sindsdien een vaste waarde als emcee in de groep.
+            Dankzij deze grote aanwinst bleven ze over met 3, het&nbsp;magische&nbsp;getal.
+        </p>
+
+        <p style="margin-bottom: 3.5rem;">
+            Nieuwe muziek werd volop digitaal gedistribueerd en enkele creaties kwamen terecht op 2&nbsp;EP's:
+            <a href="https://pure-blend.bandcamp.com/album/geschetst" target="_blank" class="text-link">Geschetst</a> in&nbsp;2011
+            en
+            <a href="https://pure-blend.bandcamp.com/album/dertussen" target="_blank" class="text-link">Dertussen</a> in&nbsp;2013.
+            <span style="display: inline-block;">
+                Als koploper de party&nbsp;single <a href="https://pure-blend.bandcamp.com/track/go-west" target="_blank" class="text-link">Go&nbsp;West</a>
+            </span>,
+            die een goed onthaal kreeg in de streek en de nieuwe stijl van Pure&nbsp;Blend benadrukte, met&nbsp;daarnaast de diepere track
+            <a href="https://pure-blend.bandcamp.com/track/waarom" target="_blank" class="text-link">Waarom</a>, waarin men de zin van het leven&nbsp;onderzoekt.
+            Niemand kon het toen nog ontkennen,
+            <span style="display: inline-block;">
+                Pure&nbsp;Blend is veel <a href="https://pure-blend.bandcamp.com/track/te-zwaer" target="_blank" class="text-link">Te&nbsp;Zwaer</a>!
+            </span>
+        </p>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: start; margin-bottom: 2rem;">
+            <!-- Go West video -->
+            <div class="youtube-container youtube-container-4-4 youtube-container-shadow-left" style="margin-right: 10px; margin-bottom: 2.5rem;">
+                <iframe width="360" height="360" src="https://www.youtube.com/embed/MwCNYgYX6DA?controls=0"
+                        title="Pure Blend - Go West"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+
+            <!-- Waarom video -->
+            <div class="youtube-container youtube-container-4-4" style="margin-left: 10px; margin-bottom: 2.5rem;">
+                <iframe width="360" height="360" src="https://www.youtube.com/embed/XH8jSWb5khU?controls=0"
+                        title="Pure Blend - Waarom"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="/assets/zip/PB-Geschetst-2011.zip" class="btn" style="margin: 1rem;">DOWNLOAD 'GESCHETST'</a>
+
+            <a href="/assets/zip/PB-Dertussen-2013.zip" class="btn" style="margin: 1rem;">DOWNLOAD 'DERTUSSEN'</a>
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 1rem;">
+        <h2>
+            Stream die shit!
+        </h2>
+
+        <p style="margin-bottom: 2rem;">
+            Heb je na al het bovenstaande gezever je interesse nog steeds niet verloren?
+            <span style="display: inline-block;">Kies een van deze services om altijd en overal stiekem te kunnen genieten van Pure&nbsp;Blend!</span>
+        </p>
+
+        <div class="link-row" style="margin-bottom: 2rem;">
+            <a href="https://open.spotify.com/artist/5n4f3v1p6i5EfAIY17X708" title="Spotify" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M248 8C111.1 8 0 119.1 0 256s111.1 248 248 248 248-111.1 248-248S384.9 8 248 8zm100.7 364.9c-4.2 0-6.8-1.3-10.7-3.6-62.4-37.6-135-39.2-206.7-24.5-3.9 1-9 2.6-11.9 2.6-9.7 0-15.8-7.7-15.8-15.8 0-10.3 6.1-15.2 13.6-16.8 81.9-18.1 165.6-16.5 237 26.2 6.1 3.9 9.7 7.4 9.7 16.5s-7.1 15.4-15.2 15.4zm26.9-65.6c-5.2 0-8.7-2.3-12.3-4.2-62.5-37-155.7-51.9-238.6-29.4-4.8 1.3-7.4 2.6-11.9 2.6-10.7 0-19.4-8.7-19.4-19.4s5.2-17.8 15.5-20.7c27.8-7.8 56.2-13.6 97.8-13.6 64.9 0 127.6 16.1 177 45.5 8.1 4.8 11.3 11 11.3 19.7-.1 10.8-8.5 19.5-19.4 19.5zm31-76.2c-5.2 0-8.4-1.3-12.9-3.9-71.2-42.5-198.5-52.7-280.9-29.7-3.6 1-8.1 2.6-12.9 2.6-13.2 0-23.3-10.3-23.3-23.6 0-13.6 8.4-21.3 17.4-23.9 35.2-10.3 74.6-15.2 117.5-15.2 73 0 149.5 15.2 205.4 47.8 7.8 4.5 12.9 10.7 12.9 22.6 0 13.6-11 23.3-23.2 23.3z"/></svg>
+            </a>
+
+            <a href="https://music.apple.com/ro/artist/pure-blend/1654821829" title="Apple Music" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+            </a>
+
+            <a href="https://www.youtube.com/krotetote/" title="Youtube" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+            </a>
+
+            <a href="https://pure-blend.bandcamp.com/" title="Bandcamp" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm48.2,326.1h-181L207.9,178h181Z"/></svg>
+            </a>
+
+            <a href="https://soundcloud.com/pureblend/" title="Soundcloud" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M111.4 256.3l5.8 65-5.8 68.3c-.3 2.5-2.2 4.4-4.4 4.4s-4.2-1.9-4.2-4.4l-5.6-68.3 5.6-65c0-2.2 1.9-4.2 4.2-4.2 2.2 0 4.1 2 4.4 4.2zm21.4-45.6c-2.8 0-4.7 2.2-5 5l-5 105.6 5 68.3c.3 2.8 2.2 5 5 5 2.5 0 4.7-2.2 4.7-5l5.8-68.3-5.8-105.6c0-2.8-2.2-5-4.7-5zm25.5-24.1c-3.1 0-5.3 2.2-5.6 5.3l-4.4 130 4.4 67.8c.3 3.1 2.5 5.3 5.6 5.3 2.8 0 5.3-2.2 5.3-5.3l5.3-67.8-5.3-130c0-3.1-2.5-5.3-5.3-5.3zM7.2 283.2c-1.4 0-2.2 1.1-2.5 2.5L0 321.3l4.7 35c.3 1.4 1.1 2.5 2.5 2.5s2.2-1.1 2.5-2.5l5.6-35-5.6-35.6c-.3-1.4-1.1-2.5-2.5-2.5zm23.6-21.9c-1.4 0-2.5 1.1-2.5 2.5l-6.4 57.5 6.4 56.1c0 1.7 1.1 2.8 2.5 2.8s2.5-1.1 2.8-2.5l7.2-56.4-7.2-57.5c-.3-1.4-1.4-2.5-2.8-2.5zm25.3-11.4c-1.7 0-3.1 1.4-3.3 3.3L47 321.3l5.8 65.8c.3 1.7 1.7 3.1 3.3 3.1 1.7 0 3.1-1.4 3.1-3.1l6.9-65.8-6.9-68.1c0-1.9-1.4-3.3-3.1-3.3zm25.3-2.2c-1.9 0-3.6 1.4-3.6 3.6l-5.8 70 5.8 67.8c0 2.2 1.7 3.6 3.6 3.6s3.6-1.4 3.9-3.6l6.4-67.8-6.4-70c-.3-2.2-2-3.6-3.9-3.6zm241.4-110.9c-1.1-.8-2.8-1.4-4.2-1.4-2.2 0-4.2.8-5.6 1.9-1.9 1.7-3.1 4.2-3.3 6.7v.8l-3.3 176.7 1.7 32.5 1.7 31.7c.3 4.7 4.2 8.6 8.9 8.6s8.6-3.9 8.6-8.6l3.9-64.2-3.9-177.5c-.4-3-2-5.8-4.5-7.2zm-26.7 15.3c-1.4-.8-2.8-1.4-4.4-1.4s-3.1.6-4.4 1.4c-2.2 1.4-3.6 3.9-3.6 6.7l-.3 1.7-2.8 160.8s0 .3 3.1 65.6v.3c0 1.7.6 3.3 1.7 4.7 1.7 1.9 3.9 3.1 6.4 3.1 2.2 0 4.2-1.1 5.6-2.5 1.7-1.4 2.5-3.3 2.5-5.6l.3-6.7 3.1-58.6-3.3-162.8c-.3-2.8-1.7-5.3-3.9-6.7zm-111.4 22.5c-3.1 0-5.8 2.8-5.8 6.1l-4.4 140.6 4.4 67.2c.3 3.3 2.8 5.8 5.8 5.8 3.3 0 5.8-2.5 6.1-5.8l5-67.2-5-140.6c-.2-3.3-2.7-6.1-6.1-6.1zm376.7 62.8c-10.8 0-21.1 2.2-30.6 6.1-6.4-70.8-65.8-126.4-138.3-126.4-17.8 0-35 3.3-50.3 9.4-6.1 2.2-7.8 4.4-7.8 9.2v249.7c0 5 3.9 8.6 8.6 9.2h218.3c43.3 0 78.6-35 78.6-78.3.1-43.6-35.2-78.9-78.5-78.9zm-296.7-60.3c-4.2 0-7.5 3.3-7.8 7.8l-3.3 136.7 3.3 65.6c.3 4.2 3.6 7.5 7.8 7.5 4.2 0 7.5-3.3 7.5-7.5l3.9-65.6-3.9-136.7c-.3-4.5-3.3-7.8-7.5-7.8zm-53.6-7.8c-3.3 0-6.4 3.1-6.4 6.7l-3.9 145.3 3.9 66.9c.3 3.6 3.1 6.4 6.4 6.4 3.6 0 6.4-2.8 6.7-6.4l4.4-66.9-4.4-145.3c-.3-3.6-3.1-6.7-6.7-6.7zm26.7 3.4c-3.9 0-6.9 3.1-6.9 6.9L227 321.3l3.9 66.4c.3 3.9 3.1 6.9 6.9 6.9s6.9-3.1 6.9-6.9l4.2-66.4-4.2-141.7c0-3.9-3-6.9-6.9-6.9z"/></svg>
+            </a>
+
+            <a href="https://www.mixcloud.com/dj-idfx/" title="Mixcloud" target="_blank" class="link-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path d="M212.98 346.566H179.789V195.114L185.973 173.47H175.262L137.127 346.566H76.1069L37.7323 173.47H27.276L33.1913 195.114V346.566H0V165H65.6506L102.248 338.096H110.747L147.329 165H212.98L212.98 346.566ZM544.459 283.589L458.434 345.655V307.534L531.329 255.776L458.434 204.017V165.896L544.459 228.231H553.721L640 165.896V204.017L566.866 255.776L640 307.549V345.655L553.721 283.589H544.459ZM430.157 272.311H248.113V239.255H430.157V272.311Z"/></svg>
+            </a>
+        </div>
+    </div>
+
+    <div class="container" style="padding-bottom: 1rem;">
+        <h2>
+            Westvlamsche hiphop <br>
+        </h2>
+
+        <div class="wvl-hiphop-intro">
+            <p style="margin-bottom: 3.5rem; clear: both;">
+                <img src="/assets/img/wvhh-day.jpg" alt="Westvlamsche Hiphop" width="150" height="150" style="width: 150px; height: auto; float: left; margin-right: 1rem; margin-bottom: 2.5rem;" class="only-theme-light" loading="lazy">
+                <img src="/assets/img/wvhh-night.jpg" alt="Westvlamsche Hiphop" width="150" height="150" style="width: 150px; height: auto; float: left; margin-right: 1rem; margin-bottom: 2.5rem;" class="only-theme-dark" loading="lazy">
+
+                <span style="display: inline-block; max-width: 55%; padding-top: 1rem;">
+                Dankzij de vele, en in vele gevallen getalenteerdere, West&#8209;Vlaamse collega's is er een sterke scene in de provincie aanwezig. Verankerd in de overvloedige boerenvelden, duinen en betongrond.
+                <br><br>
+                <strong>Dikke big up aan al de artiesten & fans van die Westvlamsche&nbsp;hiphop!</strong>
+            </span>
+            </p>
+        </div>
+
+        <h3 style="clear: both; margin-top: 3.5rem;">
+            community
+        </h3>
+
+        <a href="https://www.facebook.com/groups/westvlams/" target="_blank" style="text-decoration: none;" class="text-link">
+            Westvlamsche hiphop facebook groep <br>
+            <small  style="text-decoration: underline;">https://www.facebook.com/groups/westvlams</small>
+        </a>
+
+        <h3 style="margin-top: 3.5rem;">
+            mixtapes
+        </h3>
+
+        <div class="mixtape-row">
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 6"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-kletsers-klassiks%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 6"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-kletsers-klassiks%2F" loading="lazy"></iframe>
+            </div>
+
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 5"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-kletsers-klassiks-volume-2%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 5"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-kletsers-klassiks-volume-2%2F" loading="lazy"></iframe>
+            </div>
+
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 4"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-mixtape-2015%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 4"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-mixtape-2015%2F" loading="lazy"></iframe>
+            </div>
+
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 3"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-mixtape-2014%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 3"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-mixtape-2014%2F" loading="lazy"></iframe>
+            </div>
+
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 2"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-2013%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 2"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-2013%2F" loading="lazy"></iframe>
+            </div>
+
+            <div class="mixtape">
+                <iframe width="470" height="120" class="only-theme-light" title="dj idfx - Westvlamsche Hiphop mixtape 1"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&light=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-2012%2F" loading="lazy"></iframe>
+                <iframe width="470" height="120" class="only-theme-dark" title="dj idfx - Westvlamsche Hiphop mixtape 1"
+                        src="https://www.mixcloud.com/widget/iframe/?hide_cover=1&feed=%2Fdj-idfx%2Fwestvlamsche-hiphop-2012%2F" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <h3 style="clear: both; margin-top: 3.5rem;">
+            cyphers
+        </h3>
+
+        <div style="clear: both;">
+            <iframe width="980" height="300" title="Pure Blend - Westvlamsche Cypher"
+                    src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/197840120&color=%23949494&auto_play=false&visual=true"
+                    loading="lazy"></iframe>
+        </div>
+
+        <h3 style="margin-top: 4.5rem;">
+            videos
+        </h3>
+
+        <!-- YouTube playlist -->
+        <div class="youtube-container">
+            <iframe width="640" height="360" src="https://www.youtube.com/embed/videoseries?list=PL42ECC304BB2CE502"
+                    title="Westvlamsche hiphop playlist Youtube videos"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy">
+            </iframe>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container" style="margin-bottom: 2rem;">
+        <h2>
+            Contact
+        </h2>
+        <div>
+            <a href="#" class="text-link" id="mailLink">
+                #
+            </a>
+            <div class="link-row" style="margin-top: 1rem;">
+                <a href="https://www.facebook.com/krotetote/" title="Facebook" target="_blank" class="link-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* Theme change */
+    let initialThemeState = localStorage.getItem('pbThemeToggle') === 'true';
+    if (localStorage.getItem('pbThemeToggle') === null) {
+        initialThemeState = true;
+    }
+
+    const themeSwitch = document.querySelector('.theme-switch input');
+    themeSwitch.checked = initialThemeState;
+    themeSwitch.addEventListener('change', setTheme)
+    setTheme();
+
+    function setTheme () {
+        const html = document.querySelector("html");
+
+        if (themeSwitch.checked) {
+            html.classList.add('pb-day-theme');
+            html.classList.remove('pb-night-theme');
+        } else {
+            html.classList.add('pb-night-theme');
+            html.classList.remove('pb-day-theme');
+        }
+
+        localStorage.setItem('pbThemeToggle', themeSwitch.checked);
+    }
+
+    /* Mail link */
+    const mailLink = document.getElementById('mailLink');
+    const mailAddress = 'info' + '@' + 'pureblend' + '.' + 'be';
+
+    mailLink.innerHTML = mailAddress;
+    mailLink.setAttribute('href', 'mailto:' + mailAddress);
+</script>
+</body>
+</html>
