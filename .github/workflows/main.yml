@@ -17,4 +17,3 @@ jobs:
         server: ${{ secrets.FTP_NOTRAC_PUREBLEND_HOST }}
         username: ${{ secrets.FTP_NOTRAC_PUREBLEND_USER }}
         password: ${{ secrets.FTP_NOTRAC_PUREBLEND_PASSWORD }}
-        dry-run: true
